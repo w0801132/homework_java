@@ -6,18 +6,20 @@ var tableData = data;
 var tbody = d3.select("tbody");
 
 // Loop
-data.forEach(function(tableData) {
+function whatEver(data){
+  tbody.html("");
+  data.forEach(function(tableData) {
      console.log(tableData);
      var row = tbody.append("tr");
      Object.entries(tableData).forEach(function([key, value]) {
        console.log(key, value);
   // Append a cell to the row for each value
   // in the report object
-       var cell = tbody.append("td");
+       var cell = row.append("td");
        cell.text(value);
      });
    });
-
+}
    // Select the submit button
    var submit = d3.select("#filter-btn");
 
@@ -42,17 +44,17 @@ data.forEach(function(tableData) {
 
 var filters = {};
 
-function updateFilters(){
+function updateInfo(){
 
-var changedElement = d3.select(this).select("input");
-var elementValue = changedElement.property("value");
-var filterId = changedElement.attr("id");
+var changedThing = d3.select(this).select("input");
+var elementValue = changedThing.property("value");
+var filterThing = changedThing.attr("id");
 
 if (elementValue){
-  filters[filterId] = elementValue;
+  filters[filterThing] = elementValue;
 }
 else {
-  delete filters[filterId];
+  delete filters[filterThing];
 }
 
 filterTable();
@@ -63,7 +65,7 @@ object.entries(filters).forEach(([key, value}) => {
   filteredData = filteredData.filter(row => row[key] === value);
 });
 
-buildTable(filteredData);
+whatEver(filteredData);
 }
 // Finally, add the summary stats
      d3.selectAll(".filter").on("change", filteredData);
